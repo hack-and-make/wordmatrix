@@ -1,6 +1,4 @@
 #!/bin/sh
 
-nodemcu-tool upload init.lua
-nodemcu-tool upload words.json
-nodemcu-tool upload lib/LedMatrix.lua
-nodemcu-tool upload lib/Matrix.lua
+nodemcu-tool upload --port=/dev/tty.usbserial-142420 flash/init.lua
+nodemcu-tool upload --port=/dev/tty.usbserial-142420 flash/words.json

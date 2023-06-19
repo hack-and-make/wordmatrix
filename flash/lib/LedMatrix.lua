@@ -4,6 +4,7 @@ function newLedMatrix(width, height, isZigzag, isStartLedTop, isStartLedLeft, is
     local bytesPerLed = 3
     if not isRgb then bytesPerLed = 4 end
     local ledCount = width*height
+    print("ledCount0: " ..ledCount)
     return {
         width = width;
         height = height;
@@ -16,6 +17,7 @@ function newLedMatrix(width, height, isZigzag, isStartLedTop, isStartLedLeft, is
             if x > 0 and x <= this.width and y > 0 and y <= this.height then
                 local ledNum = this.matrix:translate(x,y)
                 --print("x: " .. x .. " y: " .. y .. " red: " .. red .. " green: " .. green .. " blue: " .. blue)
+                print("ledNum: " .. ledNum .. "ledCount1: " .. this.ledCount)
                 if ledNum > 0 and ledNum <= this.ledCount then
                     this.ledBuffer:set(ledNum, red, green, blue)
                 end

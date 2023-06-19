@@ -1,20 +1,46 @@
-dofile('Matrix.lua')
-dofile('LedMatrix.lua')
+lastWordId = 1
+wordId = 1
 
-lastWordId = 0
-wordId = 0
 
 local randomWordTimer = tmr.create()
 randomWordTimer:register(5000, tmr.ALARM_AUTO, function(t) randomWord(); end)
 randomWordTimer:start()
 
-function randomWord()
-    local json = readFile('words.json')
-    local words = sjson.decode(json)
-    local wordcount = table.getn(words["words"])
+function foo() 
+    ws2812.init()
+    local ledCount = 784
+    local bytesPerLed = 3
+    local words
+    
+    return {
+        ledCount = ledCount;
+        bytesPerLed = bytesPerLed;
+        ledBuffer = ws2812.newBuffer(ledCount, bytesPerLed);
+        init = function(this)
+            print("init")
+            local json = readFile('words.json')
+            print(json)
+            this.words = sjson.decode(json)
+        end;
+        set = function(this,id)
+            print("set")
+            this.ledBuffer:set(id, 255, 255, 255)
+        end;
+        show = function(this)
+            print("show")
+            ws2812.write(this.ledBuffer)
+        end;
+        reset = function(this)
+            this.ledBuffer:fill(0,0,0)
+        end;
+    }
+end
 
+function randomWord()
+    local wordcount = table.getn(fooInstance.words["words"])
+    
     setRandomWordId(wordcount)
-    setLeds(getWord(words, wordId))
+    setLeds(getWord(fooInstance.words, wordId))
 end
 
 function setRandomWordId(wordcount)
@@ -35,24 +61,25 @@ function getWord(words, id)
 end
 
 function setLeds(word)
-    ws2812.init()
-    local ledMatrixInstance = newLedMatrix(10, 1, true, false, false, true, true)
-
+    fooInstance:reset()
     for k,v in pairs(word) do
-        ledMatrixInstance:set(v, 1, 255, 255, 255)
         print("setLed(r, g, b, " .. v .. ")")
+        fooInstance:set(v)
     end
 
-    ledMatrixInstance:show()
+    fooInstance:show()
 end
 
 function readFile(filename)
     local out
 
     if file.open(filename) then
-        out = file.read()
+        out = file.read(2000)
         file.close()
     end
 
     return out
 end
+
+fooInstance = foo()
+fooInstance:init()
