@@ -34,7 +34,3 @@ We recommend [nodemcu-build.com](https://nodemcu-build.com) for building.
 
 - install [NodeMCU-Tool](https://github.com/AndiDittrich/NodeMCU-Tool), or [something else](https://nodemcu.readthedocs.io/en/release/upload)
 - sudo ./flash/flash.sh
-
-## 🖖 3rd party
-
-[LedMatrix](https://github.com/T-vK/LedMatrix)
