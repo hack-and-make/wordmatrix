@@ -34,3 +34,7 @@ We recommend [nodemcu-build.com](https://nodemcu-build.com) for building.
 
 - install [NodeMCU-Tool](https://github.com/AndiDittrich/NodeMCU-Tool), or [something else](https://nodemcu.readthedocs.io/en/release/upload)
 - sudo ./flash/flash.sh
+
+## 3rd party
+
+We used [Black Ops One](https://fonts.google.com/specimen/Black+Ops+One) as font for the word plates.
