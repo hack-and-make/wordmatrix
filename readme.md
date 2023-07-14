@@ -5,6 +5,8 @@ We create our first prototype of a wordmatrix.
 To do so, we build an LEDMatrix which will be controlled by the esp8266.
 Then we light different words in the 3d printed wordmask.
 
+- resources/ is just a collection of layouts for wordmatrices and drafts of 3d models, included as inspiration.
+
 ## 💾 Compatible hardware
 
 - esp8266
